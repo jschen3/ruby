@@ -1,4 +1,6 @@
 Depot::Application.routes.draw do
+  get "store/index"
+  root :to => 'store#index', :as =>'store' # change the root to the store path variable
   resources :products
 
   # The priority is based upon order of creation:

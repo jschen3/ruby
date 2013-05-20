@@ -1,0 +1,15 @@
+<% if notice%>
+<p id="notice"><%= notice%></p>
+<% end %>
+
+<h1>The Catalog</h1>
+<% @products.each do |product| %>
+	<div class="entry">
+		<%= image_tag(product.image_url) %><!-- creates an img tag using product.image_url as the source -->
+		<h3><%= product.title %></h3>
+		<%= sanitize(product.description) %> <!-- allows tags to be placed in the description and thus make it better html friendly-->
+		<div class="price_line">
+			<span class="price"><%= sprintf("$%0.02f",product.price) %></span>
+	</div>
+<% end%>
+<p>Find me in app/views/store/index.html.erb</p>
