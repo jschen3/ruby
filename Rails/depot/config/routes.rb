@@ -1,4 +1,8 @@
 Depot::Application.routes.draw do
+  resources :line_items
+
+  resources :carts
+
   get "store/index"
   root :to => 'store#index', :as =>'store' # change the root to the store path variable
   resources :products
