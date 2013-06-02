@@ -3,10 +3,9 @@ class LineItemsController < ApplicationController
   # GET /line_items.xml
   def index
     @line_items = LineItem.all
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @line_items }
+      format.html #index.html.erb
+      format.xml { render :xml =>@line_items}
     end
   end
 
@@ -22,17 +21,14 @@ class LineItemsController < ApplicationController
   end
 
   # GET /line_items/new
-  # GET /line_items/new.xml
   def new
     @line_item = LineItem.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @line_item }
     end
   end
-
-  # GET /line_items/1/edit
   def edit
     @line_item = LineItem.find(params[:id])
   end
@@ -42,11 +38,11 @@ class LineItemsController < ApplicationController
   def create
     @cart =current_cart
     product=Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(:product => product)
+    @line_item = @cart.add_product(product.id)
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to(@line_item.cart, :notice => 'Line item was sucessfully created.')}
-        format.xml {render :xml => @line_item}
+        format.xml {render :xml => @line_item, :status =>:created, :location=>@line_item }
       else
         format.html {render :action => "new"}
         format.xml {render :xml => @line_item.errors, :status => :unprocessable_entity}
